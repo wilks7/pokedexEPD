@@ -7,7 +7,7 @@ def main():
 
     args = parser.parse_args()
 
-    pokedex.display_generation(args.generation)
+    pokedex.display(args.generation)
 
 if __name__ == "__main__":
     main()
