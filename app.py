@@ -26,7 +26,7 @@ def main():
     print(args)
 
     if args.slideshow:
-        pokedex.slideshow(generation)
+        pokedex.slideshow(generation, args.sorted)
     else:
         pokedex.display(generation, pokedex_entry)
 

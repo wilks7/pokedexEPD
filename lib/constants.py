@@ -2,7 +2,7 @@
 
 DEFAULT_GAMES = {
     "Gen1": "red-blue",
-    "Gen2": "silver",
+    "Gen2": "crystal",
     "Gen3": "ruby-sapphire"
     # Add more defaults for other generations if needed
 }
