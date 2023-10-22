@@ -3,7 +3,7 @@ from .pokeSprite import get_pokemon_sprite
 import requests
 
 def getSprite(generation, pokedex, height):
-    (dir, file) = get_pokemon_sprite(generation, "red-blue", "gray", str(pokedex))
+    (dir, file) = get_pokemon_sprite(generation, None, "gray", str(pokedex))
     path = f'./{dir}/{file}'
     print(path)
     img = Image.open(path)

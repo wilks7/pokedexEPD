@@ -1,19 +1,5 @@
 import random
-# import os
-
-DEFAULT_GAMES = {
-    "Gen1": "red-blue",
-    "Gen2": "silver",
-    "Gen3": "ruby-sapphire"
-    # Add more defaults for other generations if needed
-}
-
-POKEMON_RANGES = {
-    "Gen1": (1, 151),
-    "Gen2": (1, 251),
-    "Gen3": (1, 386),
-    # Add ranges for other generations if needed
-}
+import constants
 
 def get_pokemon_sprite(gen, game, gray, pokemon_id):
     """
@@ -29,9 +15,9 @@ def get_pokemon_sprite(gen, game, gray, pokemon_id):
     """
     
     if game is None:
-        game = DEFAULT_GAMES.get(gen, "")
+        game = constants.DEFAULT_GAMES.get(gen, "")
     if pokemon_id is None:
-        start, end = POKEMON_RANGES.get(gen, (1, 151))
+        start, end = constants.POKEMON_RANGES.get(gen, (1, 151))
         pokemon_id = random.randint(start, end)
     
     directory = f'images/{gen}/{game}'
