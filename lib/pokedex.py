@@ -9,7 +9,7 @@ from .constants import POKEMON_RANGES
 
 logging.root.setLevel('DEBUG')
 
-class Pokedex:
+class PokedexPaper:
 
     def __init__(self):
         self.screen = Screen(epd="HD", rotation=0, vcom=-1.58)
