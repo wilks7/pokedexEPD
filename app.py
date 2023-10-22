@@ -21,6 +21,7 @@ def main():
         start, end = constants.POKEMON_RANGES.get(generation, (1, 151))
         pokedex_entry = random.randint(start, end)
 
+    pokedex = pokedex.Pokedex()
     pokedex.slideshow(generation)
 
     # if args.slideshow:
