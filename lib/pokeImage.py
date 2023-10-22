@@ -1,7 +1,6 @@
 from PIL import Image
-from pokeSprite import get_pokemon_sprite
+from .pokeSprite import get_pokemon_sprite
 import requests
-import urllib.request 
 
 def getSprite(pokemon, height):
     (dir, file) = get_pokemon_sprite("Gen1", "red-blue", "gray", str(pokemon.number))

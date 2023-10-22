@@ -77,6 +77,8 @@ def get_pokemon_data(pokedex_number):
     else:
         print("HTTP request failed with status code:", response.status_code)
         return None
+    
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:

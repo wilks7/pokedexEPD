@@ -1,6 +1,6 @@
 from epdlib import Layout
 from PIL import Image
-from pokeImage import getSprite
+from .pokeImage import getSprite
 
 class PokedexLayout(Layout):
     def __init__(self, resolution, mode):
@@ -119,8 +119,6 @@ class PokedexLayout(Layout):
                 'font_size': 12
             }
         }
-
-
 
         
     def updatePokemon(self, pokemon):
