@@ -127,7 +127,8 @@ class PokedexLayout(Layout):
         self.updateText(pokemon.flavor)
 
     def updateImage(self, pokemon):
-        img = getSprite(pokemon)
+        width, height = self.resolution
+        img = getSprite(pokemon, height)
         self.update_contents({'image_block': img})
 
     def updateStats(self, pokemon):
