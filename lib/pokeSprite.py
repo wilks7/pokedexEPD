@@ -15,7 +15,7 @@ POKEMON_RANGES = {
     # Add ranges for other generations if needed
 }
 
-def get_pokemon_sprite(gen, game=None, gray=None, pokemon_id=None):
+def get_pokemon_sprite(gen, game, gray, pokemon_id):
     """
     Returns the path to the desired Pokémon sprite.
 
