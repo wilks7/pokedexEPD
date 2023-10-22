@@ -16,7 +16,7 @@ def resize_image(img, height):
     original_width, original_height = img.size
     aspect_ratio = original_width / original_height
     new_width = int(desired_height * aspect_ratio)
-    img = img.resize((new_width, desired_height), Image.ANTIALIAS)
+    img = img.resize((new_width, desired_height), Image.NEAREST)
     return img
 
 def pullImage(pokemon):
