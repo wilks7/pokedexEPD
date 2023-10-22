@@ -1,5 +1,5 @@
 import random
-import constants
+from lib import constants
 
 def get_pokemon_sprite(gen, game, gray, pokemon_id):
     """
