@@ -1,5 +1,5 @@
 import argparse
-from lib import pokedex, constants
+from lib import Pokedex, constants
 import random
 
 
@@ -21,7 +21,7 @@ def main():
         start, end = constants.POKEMON_RANGES.get(generation, (1, 151))
         pokedex_entry = random.randint(start, end)
 
-    pokedex = pokedex.Pokedex()
+    pokedex = Pokedex.Pokedex()
     pokedex.slideshow(generation)
 
     # if args.slideshow:
