@@ -1,6 +1,5 @@
 from epdlib import Layout
 from PIL import Image
-from .pokeImage import getSprite
 
 class PokedexLayout(Layout):
     def __init__(self, resolution, mode):
@@ -124,11 +123,8 @@ class PokedexLayout(Layout):
     def updatePokemon(self, pokemon):
         self.updateImage(pokemon)
         self.updateStats(pokemon)
-        self.updateEntry(pokemon.flavor)
 
-    def updateImage(self, pokemon):
-        width, height = self.resolution
-        img = getSprite(pokemon, height)
+    def updateImage(self, img):
         self.update_contents({'image_block': img})
 
     def updateStats(self, pokemon):
@@ -144,10 +140,7 @@ class PokedexLayout(Layout):
         self.update_contents({'pokemon_weight': weight})
         self.update_contents({'pokedex_number': number})
 
-
-    def updateEntry(self, entry):
-        self.update_contents({'pokedex_entry': entry})
-
+        self.update_contents({'pokedex_entry': pokemon.flavor})
 
     def generate_layout(self):
         return self.concat()

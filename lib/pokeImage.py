@@ -2,8 +2,8 @@ from PIL import Image
 from .pokeSprite import get_pokemon_sprite
 import requests
 
-def getSprite(pokemon, height):
-    (dir, file) = get_pokemon_sprite("Gen1", "red-blue", "gray", str(pokemon.number))
+def getSprite(generation, pokedex, height):
+    (dir, file) = get_pokemon_sprite(generation, "red-blue", "gray", str(pokedex))
     path = f'./{dir}/{file}'
     print(path)
     img = Image.open(path)
