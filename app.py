@@ -24,17 +24,17 @@ def main():
 
     args = parser.parse_args()
     generation = args.generation
-    pokedex = args.pokedex
+    pokedex_entry = args.pokedex
 
 
     game = ''
     if game == '':
         game = DEFAULT_GAMES.get(generation, "")
-    if pokedex == 0:
+    if pokedex_entry == 0:
         start, end = POKEMON_RANGES.get(generation, (1, 151))
-        pokedex = random.randint(start, end)
+        pokedex_entry = random.randint(start, end)
 
-    pokedex.display(generation, pokedex)
+    pokedex.display(generation, pokedex_entry)
 
 if __name__ == "__main__":
     main()
