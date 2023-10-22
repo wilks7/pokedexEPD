@@ -1,6 +1,6 @@
 import argparse
 from lib import constants
-from lib.Pokedex import PokedexPaper
+from lib.pokedex import PokedexPaper
 import random
 
 
