@@ -13,4 +13,9 @@ setup(
     license="MIT",
     keywords="pokedex epaper display",
     url="https://github.com/wilks7/PokedexEPD",
+    entry_points={
+        'console_scripts': [
+            'pokedexepd=app:main',
+        ],
+    },
 )
