@@ -29,7 +29,7 @@ class PokedexPaper:
         # Generate and write the layout to the EPD
         self.screen.writeEPD(self.layout.concat())
 
-    def slideshow(self, generation, sorted=True, delay=5):
+    def slideshow(self, generation, sorted=True, delay=10):
         start, end = POKEMON_RANGES.get(generation, (1, 151))
         pokedex_entries = list(range(start, end + 1))
         
