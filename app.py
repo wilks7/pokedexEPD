@@ -10,6 +10,7 @@ def main():
     parser.add_argument('--pokedex', type=int, default=0, help="Number of the Pokemon's Pokedex entry (e.g., 1, 2, etc.).")
     parser.add_argument('--slideshow', action='store_true', help="Start a slideshow to display the Pokemon entries")
     parser.add_argument('--sorted', action='store_true', help="Order to display the Pokemon entries")
+    parser.add_argument('--delay', type=int, default=60, help="Delay between slideshow items")
 
     args = parser.parse_args()
     generation = args.generation
@@ -26,7 +27,7 @@ def main():
     print(args)
 
     if args.slideshow:
-        pokedex.slideshow(generation, args.sorted)
+        pokedex.slideshow(generation, args.sorted, args.delay)
     else:
         pokedex.display(generation, pokedex_entry)
 

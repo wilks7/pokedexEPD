@@ -39,3 +39,4 @@ class PokedexPaper:
         for pokedex in pokedex_entries:
             self.display(generation, pokedex)
             sleep(delay)
+        # self.screen.clearEPD()
