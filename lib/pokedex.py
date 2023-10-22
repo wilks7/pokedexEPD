@@ -7,7 +7,7 @@ from .PokedexLayout import PokedexLayout
 from .pokedex_api import get_pokemon_data
 from .constants import POKEMON_RANGES
 
-logging.root.setLevel('DEBUG')
+# logging.root.setLevel('DEBUG')
 
 class PokedexPaper:
 
