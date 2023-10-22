@@ -23,12 +23,12 @@ def main():
         pokedex_entry = random.randint(start, end)
 
     pokedex = PokedexPaper()
-    pokedex.slideshow(generation)
+    print(args)
 
-    # if args.slideshow:
-    #     pokedex.slideshow(generation)
-    # else:
-    #     pokedex.display(generation, pokedex_entry)
+    if args.slideshow:
+        pokedex.slideshow(generation)
+    else:
+        pokedex.display(generation, pokedex_entry)
 
 
 
