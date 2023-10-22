@@ -124,7 +124,7 @@ class PokedexLayout(Layout):
     def updatePokemon(self, pokemon):
         self.updateImage(pokemon)
         self.updateStats(pokemon)
-        self.updateText(pokemon.flavor)
+        self.updateEntry(pokemon.flavor)
 
     def updateImage(self, pokemon):
         width, height = self.resolution
