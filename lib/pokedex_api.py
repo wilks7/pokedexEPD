@@ -1,33 +1,63 @@
 import requests
 import sys
+from pokemon import Pokemon
+from constants import DEFAULT_GAMES, GENERATIONS
 
-class Pokemon:
-    def __init__(self, number, species, pokeType, height, weight, flavor, game, sprite):
-        self.type = pokeType
-        self.number = number
-        self.species = species
-        self.height = height
-        self.weight = weight
-        self.flavor = flavor
-        self.game = game
-        self.sprite = sprite
 
-def get_pokemon_data(pokedex_number):
-    # Specify the GraphQL endpoint
-    url = "https://graphqlpokemon.favware.tech/v7"
-
-    # Set request headers for GraphQL
-    headers = {"Content-Type": "application/json"}
+def get_pokemon_data(pokedex_number, generation, version=None, variant=None):
+    # Constants
+    URL = "https://graphqlpokemon.favware.tech/v7"
+    HEADERS = {"Content-Type": "application/json"}
 
     # Define the GraphQL query with the parameter
-    query = f"""
+    query = _build_query(pokedex_number)
+
+    # Make the POST request with the query
+    try:
+        response = requests.post(URL, headers=HEADERS, json={"query": query})
+
+        # Check the response status code
+        if response.status_code == 200:
+            data = response.json()
+            pokemon_data = data.get("data", {}).get("getPokemonByDexNumber", {})
+
+            if not pokemon_data:
+                print("Pokemon data not found.")
+                return None
+            pokemon =  _extract_pokemon_from_data(pokedex_number, pokemon_data)
+            pokemon.sprite = build_sprite_url(pokedex_number, generation, version, variant)
+            return pokemon
+        else:
+            print("HTTP request failed with status code:", response.status_code)
+            return None
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        return None
+    
+def build_sprite_url(pokedex_entry, generation, version=None, variant=None):
+    base_url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+    
+    generation_path = GENERATIONS.get(generation)
+    version_path = version or DEFAULT_GAMES.get(generation)
+    
+    path = f"versions/{generation_path}/{version_path}/"
+    
+    if variant:
+        path += f"{variant}/"
+    
+    path += f"{pokedex_entry}.png"
+    
+    return base_url + path
+
+
+def _build_query(pokedex):
+    return f"""
     {{
-      getPokemonByDexNumber(number: {pokedex_number}, offsetFlavorTexts: 1, reverseFlavorTexts: false) {{
+    getPokemonByDexNumber(number: {pokedex}, offsetFlavorTexts: 8, reverseFlavorTexts: false) {{
         species
         height
         weight
         num
-        sprite
         flavorTexts {{
             flavor
             game
@@ -35,49 +65,31 @@ def get_pokemon_data(pokedex_number):
         types {{
             name
         }}
-      }}
+    }}
     }}
     """
 
-    # Make the POST request with the query
-    response = requests.post(url, headers=headers, json={"query": query})
+def _extract_pokemon_from_data(pokedex_number, pokemon_data):
+    pokemon_name = pokemon_data.get("species", "")
+    pokemon_weight = pokemon_data.get("weight", -1)
+    pokemon_height = pokemon_data.get("height", -1)
+    flavor_texts = pokemon_data.get("flavorTexts", [])
+    poke_types = pokemon_data.get("types", [])
+    flavor = game = ""
+    poke_type = ""
 
-    # Check the response status code
-    if response.status_code == 200:
-        data = response.json()
-        pokemon_data = data.get("data", {}).get("getPokemonByDexNumber", {})
 
-        if not pokemon_data:
-            print("Pokemon data not found.")
-            return None
+    if flavor_texts:
+        # Extract the first flavor text (assuming there's at least one)
+        first_flavor_text = flavor_texts[0]
+        flavor = first_flavor_text.get("flavor", "")
+        game = first_flavor_text.get("game", "")
 
-        pokemon_name = pokemon_data.get("species", "")
-        pokemon_weight = pokemon_data.get("weight", -1)
-        pokemon_height = pokemon_data.get("height", -1)
-        pokemon_sprite = pokemon_data.get("sprite", "")
+    if poke_types:
+        first_type_text = poke_types[0]
+        poke_type = first_type_text.get("name", "")
 
-        flavor_texts = pokemon_data.get("flavorTexts", [])
-        pokeTypes = pokemon_data.get("types", [])
-        flavor = game = ""
-        poke_type = ""
-
-        if flavor_texts:
-            # Extract the first flavor text (assuming there's at least one)
-            first_flavor_text = flavor_texts[0]
-            flavor = first_flavor_text.get("flavor", "")
-            game = first_flavor_text.get("game", "")
-
-        if pokeTypes:
-            first_type_text = pokeTypes[0]
-            poke_type = first_type_text.get("name", "")
-
-        pokemon = Pokemon(pokedex_number, pokemon_name, poke_type, pokemon_height, pokemon_weight, flavor, game, pokemon_sprite)
-        print("Fetched:", pokemon.species)
-        return pokemon
-    else:
-        print("HTTP request failed with status code:", response.status_code)
-        return None
-    
+    return Pokemon(pokedex_number, pokemon_name, poke_type, pokemon_height, pokemon_weight, flavor, game, None)
 
 
 if __name__ == "__main__":
@@ -85,11 +97,11 @@ if __name__ == "__main__":
         print("Usage: python get_pokemon_data.py <pokemon_number>")
     else:
         pokemon_number = int(sys.argv[1])
-        pokemon = get_pokemon_data(pokemon_number)
+
+        pokemon = get_pokemon_data(pokemon_number, "Gen1")
+        sprite = build_sprite_url(pokemon_number, "Gen1", "red-blue", "gray")
 
         if pokemon:
-            print("Pokemon Name:", pokemon.species)
-            print("Pokedex Weight:", pokemon.weight)
-            print("Pokedex Height:", pokemon.height)
-            print("Flavor:", pokemon.flavor)
-            print("Game:", pokemon.game)
+            print(pokemon.species)
+            print(pokemon.sprite)
+
