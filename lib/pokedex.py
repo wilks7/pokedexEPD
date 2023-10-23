@@ -3,9 +3,9 @@ from time import sleep
 import logging
 import random
 
-from .pokeImage import getSprite
+from .pokeImage import fetchSprite
 from .PokedexLayout import PokedexLayout
-from .pokedex_api import get_pokemon_data
+from .pokedex_api import build_pokemon
 from .constants import POKEMON_RANGES
 
 # logging.root.setLevel('DEBUG')
@@ -21,8 +21,8 @@ class PokedexPaper:
 
     def display(self, generation, pokedex):
         # Fetch Pokemon Data and Image
-        pokemon = get_pokemon_data(pokedex)
-        img = getSprite(generation, pokedex, self.height)
+        pokemon = build_pokemon(pokedex, generation)
+        img = fetchSprite(pokemon.sprite)
         
         # Update Layout contents
         self.layout.updatePokemon(pokemon, img)

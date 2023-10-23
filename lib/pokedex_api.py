@@ -3,8 +3,7 @@ import sys
 from pokemon import Pokemon
 from constants import DEFAULT_GAMES, GENERATIONS
 
-
-def get_pokemon_data(pokedex_number, generation, version=None, variant=None):
+def build_pokemon(pokedex_number, generation, version=None, variant=None):
     # Constants
     URL = "https://graphqlpokemon.favware.tech/v7"
     HEADERS = {"Content-Type": "application/json"}
@@ -98,7 +97,7 @@ if __name__ == "__main__":
     else:
         pokemon_number = int(sys.argv[1])
 
-        pokemon = get_pokemon_data(pokemon_number, "Gen1")
+        pokemon = build_pokemon(pokemon_number, "Gen1")
         sprite = build_sprite_url(pokemon_number, "Gen1", "red-blue", "gray")
 
         if pokemon:
