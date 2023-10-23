@@ -1,6 +1,6 @@
 import requests
 import sys
-from constants import DEFAULT_GAMES, GENERATIONS
+from .constants import DEFAULT_GAMES, GENERATIONS
 
 class Pokemon:
     def __init__(self, number, species, pokeType, height, weight, flavor, game, sprite):
