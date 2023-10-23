@@ -1,7 +1,19 @@
 import requests
 import sys
-from pokemon import Pokemon
 from constants import DEFAULT_GAMES, GENERATIONS
+
+class Pokemon:
+    def __init__(self, number, species, pokeType, height, weight, flavor, game, sprite):
+        self.type = pokeType
+        self.number = number
+        self.species = species
+        self.height = height
+        self.weight = weight
+        self.flavor = flavor
+        self.game = game
+        self.sprite = sprite
+
+
 
 def build_pokemon(pokedex_number, generation, version=None, variant=None):
     # Constants
