@@ -22,7 +22,7 @@ class PokedexPaper:
     def display(self, generation, pokedex):
         # Fetch Pokemon Data and Image
         pokemon = build_pokemon(pokedex, generation)
-        img = fetchSprite(pokemon.sprite)
+        img = fetchSprite(pokemon.sprite, self.height)
         
         # Update Layout contents
         self.layout.updatePokemon(pokemon, img)
