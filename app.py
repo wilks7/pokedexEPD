@@ -24,7 +24,6 @@ def main():
         pokedex_entry = random.randint(start, end)
 
     pokedex = PokedexPaper()
-    print(args)
 
     if args.slideshow:
         pokedex.slideshow(generation, args.sorted, args.delay)
