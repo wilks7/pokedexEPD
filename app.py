@@ -23,6 +23,7 @@ def main():
         start, end = constants.POKEMON_RANGES.get(generation, (1, 151))
         pokedex_entry = random.randint(start, end)
 
+    print("Initializing Display")
     pokedex = PokedexPaper()
 
     if args.slideshow:

@@ -11,9 +11,9 @@ from .constants import POKEMON_RANGES
 # logging.root.setLevel('DEBUG')
 
 class PokedexPaper:
-
     def __init__(self):
         self.screen = Screen(epd="HD", rotation=0, vcom=-1.58)
+        print("Resolutin", self.screen.resolution)
         width, height = self.screen.resolution
         self.layout = PokedexLayout(self.screen.resolution, 'L')
         self.width = width
