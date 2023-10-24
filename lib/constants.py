@@ -1,39 +1,27 @@
 # constants.py
 
-
-GENERATIONS = {
-    "Gen1": "generation-i",
-    "Gen2": "generation-ii",
-    "Gen3": "generation-iii",
-    "Gen4": "generation-iv",
-    "Gen5": "generation-v",
-    "Gen6": "generation-vi",
-    "Gen7": "generation-vii",
-    "Gen8": "generation-viii"
-}
-
 # Mapping of generations to their default games
 DEFAULT_GAMES = {
-    "Gen1": "red-blue",
-    "Gen2": "crystal",
-    "Gen3": "ruby-sapphire",
-    "Gen4": "diamond-pearl",
-    "Gen5": "black-white",
-    "Gen6": "x-y",
-    "Gen7": "ultra-sun-ultra-moon",
-    "Gen8": "icons"
+    1: "red-blue",
+    2: "silver",
+    3: "ruby-sapphire",
+    4: "diamond-pearl",
+    5: "black-white",
+    6: "x-y",
+    7: "ultra-sun-ultra-moon",
+    8: "icons"
 }
 
 # Mapping of generations to the range of Pokémon they include
 POKEMON_RANGES = {
-    "Gen1": (1, 151),
-    "Gen2": (152, 251),
-    "Gen3": (252, 386),
-    "Gen4": (387, 493),
-    "Gen5": (494, 649),
-    "Gen6": (650, 721),
-    "Gen7": (722, 809),
-    "Gen8": (810, 898)  # Assuming Gen 8 goes up to #898, adjust as needed
+    1: (1, 151),
+    2: (152, 251),
+    3: (252, 386),
+    4: (387, 493),
+    5: (494, 649),
+    6: (650, 721),
+    7: (722, 809),
+    8: (810, 898)  # Assuming Gen 8 goes up to #898, adjust as needed
 }
 
 # Mapping of games (versions) to their available sprite variants
