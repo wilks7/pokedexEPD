@@ -1,7 +1,7 @@
 from epdlib import Screen
-from .lib.layout.PokedexLayout import PokedexLayout
-from .lib.constants import POKEMON_RANGES
-from .pokedex import PokedexHelper
+from lib.layout.PokedexLayout import PokedexLayout
+from lib.constants import POKEMON_RANGES
+from pokedex import PokedexHelper
 import random
 from time import sleep
 from config import get_config
