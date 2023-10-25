@@ -1,13 +1,26 @@
 from epdlib import Layout
 from PIL import Image
 from .gen1_layout import Gen1_Layout
+from .gen2_layout import Gen2_Layout
+from .gen3_layout import Gen3_Layout
+
+
+Layout_Mapping = {
+    1: Gen1_Layout,
+    2: Gen2_Layout,
+    3: Gen3_Layout,
+    4: Gen1_Layout,
+    5: Gen1_Layout,
+    6: Gen1_Layout,
+    7: Gen1_Layout,
+    8: Gen1_Layout,
+    9: Gen1_Layout,
+}
 
 class PokedexLayout(Layout):
     def __init__(self, resolution, mode, generation):
         super().__init__(resolution=resolution, mode=mode)
-        # if generation == 1:
-        self.layout = Gen1_Layout
-
+        self.layout = Layout_Mapping.get(generation, Gen1_Layout)
         
     def updatePokemon(self, pokemon, img):
         self.update_contents({'image_block': img})

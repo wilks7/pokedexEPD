@@ -1,6 +1,14 @@
 import socket
 
-def send_pisugar_command(command):
+def get_battery_level():
+    response = _send_pisugar_command("get battery\n")
+    return float(response) if response is not None else None
+
+def is_running_on_battery():
+    charging_status = _send_pisugar_command("get battery_charging\n")
+    return charging_status.lower() == "false" if charging_status is not None else None
+
+def _send_pisugar_command(command):
     try:
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
             sock.connect("/tmp/pisugar-server.sock")
@@ -12,18 +20,6 @@ def send_pisugar_command(command):
         print("Error:", str(e))
     
     return None
-
-def get_battery_level():
-    response = send_pisugar_command("get battery\n")
-    return float(response) if response is not None else None
-
-def is_running_on_battery():
-    charging_status = send_pisugar_command("get battery_charging\n")
-    return charging_status.lower() == "false" if charging_status is not None else None
-
-def is_battery_charging():
-    charging_status = send_pisugar_command("get battery_charging\n")
-    return charging_status.lower() == "true" if charging_status is not None else None
 
 if __name__ == "__main__":
     battery_level = get_battery_level()

@@ -1,16 +1,7 @@
 # constants.py
 
 # Mapping of generations to their default games
-DEFAULT_GAMES = {
-    1: "red-blue",
-    2: "silver",
-    3: "ruby-sapphire",
-    4: "diamond-pearl",
-    5: "black-white",
-    6: "x-y",
-    7: "ultra-sun-ultra-moon",
-    8: "icons"
-}
+
 
 # Mapping of generations to the range of Pokémon they include
 POKEMON_RANGES = {
