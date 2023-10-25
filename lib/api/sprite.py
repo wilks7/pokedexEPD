@@ -3,7 +3,7 @@ import requests
 from PIL import Image
 from io import BytesIO
 
-def fetchSprite(pokedex_entry, generation, version=None, variant=None):
+def fetch_sprite(pokedex_entry, generation, version=None, variant=None):
     url = build_sprite_url(pokedex_entry, generation, version, variant)
 
     headers = {

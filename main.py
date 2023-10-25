@@ -1,6 +1,6 @@
 import configargparse
 from lib import constants
-from pokedex_epd import PokedexEPD
+from lib.pokedex_epd import PokedexEPD
 import random
 import os
 import sys

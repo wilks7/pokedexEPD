@@ -2,7 +2,7 @@ import configargparse
 import configparser
 import os
 import sys
-from config import get_config
+from lib.config import get_config
 
 def main():
     current_directory = os.getcwd()
