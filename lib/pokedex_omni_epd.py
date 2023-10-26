@@ -1,6 +1,10 @@
 from omni_epd import displayfactory, EPDNotFoundError
 import sys
 from .pokedex.gen1_paper import Gen1
+from .config import get_config
+from .constants import POKEMON_RANGES
+import random
+from time import sleep
 
 class PokedexEPD:
     def __init__(self, generation, version):
@@ -22,17 +26,17 @@ class PokedexEPD:
 
         self.epd.close()
 
-    # def slideshow(self, sorted=None, delay=None, loop=None):
-    #     sorted = sorted or bool(get_config("Slideshow", "sorted")) or True
-    #     delay = delay or int(get_config("Slideshow", "delay")) or 10
-    #     loop = loop or bool(get_config("Slideshow", "loop")) or False
+    def slideshow(self, sorted=None, delay=None, loop=None):
+        sorted = sorted or bool(get_config("Slideshow", "sorted")) or True
+        delay = delay or int(get_config("Slideshow", "delay")) or 10
+        loop = loop or bool(get_config("Slideshow", "loop")) or False
 
-    #     start, end = POKEMON_RANGES.get(self.generation, None)
-    #     pokedex_entries = list(range(start, end + 1))
+        start, end = POKEMON_RANGES.get(self.generation, None)
+        pokedex_entries = list(range(start, end + 1))
         
-    #     if not sorted:
-    #         random.shuffle(pokedex_entries)
+        if not sorted:
+            random.shuffle(pokedex_entries)
 
-    #     for pokedex in pokedex_entries:
-    #         self.display(pokedex)
-    #         sleep(delay)
+        for pokedex in pokedex_entries:
+            self.display(pokedex)
+            sleep(delay)
