@@ -9,7 +9,8 @@ from time import sleep
 class PokedexEPD:
     def __init__(self, generation, version):
         try:
-            resolution = (self.epd.width, self.epd.height)
+            epd = displayfactory.load_display_driver()
+            resolution = (epd.width, epd.height)
             self.pokedex = Gen1(resolution, generation, version)
 
         except EPDNotFoundError:
