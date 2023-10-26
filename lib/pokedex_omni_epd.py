@@ -36,10 +36,10 @@ class PokedexEPD:
             random.shuffle(pokedex_entries)
 
         self.epd.prepare()
-
         for pokedex in pokedex_entries:
-            self.epd.clear()
-            self.display(pokedex)
+            img = self.pokedex.draw_dex(pokedex, variant)
+            self.epd.display(img)
+            self.epd.close
             sleep(delay)
 
         self.epd.close()
