@@ -26,26 +26,28 @@ def main():
 
     args, _ = parser.parse_known_args()
     
-    pokedexEPD = PokedexEPD(args.generation, args.version)
     if args.slideshow:
-        pokedexEPD.slideshow()
+        # pokedexEPD.slideshow()
+        pokedexEPD = PokedexEPD(args.generation, args.version)
+
         # from lib.pokedex_epdlib import PokedexPaper
-        # sorted = bool(get_config("Slideshow", "sorted")) or True
-        # delay = int(get_config("Slideshow", "delay")) or 10
-        # loop = bool(get_config("Slideshow", "loop")) or False
+        sorted = bool(get_config("Slideshow", "sorted")) or True
+        delay = int(get_config("Slideshow", "delay")) or 10
+        loop = bool(get_config("Slideshow", "loop")) or False
 
-        # start, end = POKEMON_RANGES.get(args.generation, None)
-        # pokedex_entries = list(range(start, end + 1))
+        start, end = POKEMON_RANGES.get(args.generation, None)
+        pokedex_entries = list(range(start, end + 1))
         
-        # if not sorted:
-        #     random.shuffle(pokedex_entries)
+        if not sorted:
+            random.shuffle(pokedex_entries)
 
-        # for pokedex in pokedex_entries:
-        #     pokedexPaper = PokedexPaper(args.generation, args.version)
-        #     pokedexPaper.display(pokedex)
-        #     sleep(delay)
+        for pokedex in pokedex_entries:
+            pokedexEPD = PokedexEPD(args.generation, args.version)
+            pokedexEPD.display(pokedex)
+            sleep(delay)
 
     else:
+        pokedexEPD = PokedexEPD(args.generation, args.version)
 
         pokedex = args.pokedex
         if pokedex is None :
