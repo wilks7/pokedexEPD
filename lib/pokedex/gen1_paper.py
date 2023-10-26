@@ -25,7 +25,7 @@ class Gen1(Pokedex):
         size = self.draw_image(pokedex, variant)
         self.add_stats(pokemon.species, pokemon.type, pokemon.height, pokemon.weight)
         self.add_description(pokemon.flavor)
-        self.draw_num(25, size)
+        self.draw_num(pokedex, size)
         self.add_custom_line()
         return self.canvas
 
@@ -187,7 +187,7 @@ class Gen1(Pokedex):
             font_size += 1
 
     def kg_to_lb(self, weight_kg):
-        weight_lb = float(weight_kg) * 2.20462
+        weight_lb = float(weight_kg*0.1) * 2.20462
         return f'{weight_lb:.1f} l b'
 
     def meters_to_feet_inches(self, height_m):

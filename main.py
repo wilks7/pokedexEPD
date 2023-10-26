@@ -27,10 +27,6 @@ def main():
     args, _ = parser.parse_known_args()
     
     if args.slideshow:
-        # pokedexEPD.slideshow()
-        pokedexEPD = PokedexEPD(args.generation, args.version)
-
-        # from lib.pokedex_epdlib import PokedexPaper
         sorted = bool(get_config("Slideshow", "sorted")) or True
         delay = int(get_config("Slideshow", "delay")) or 10
         loop = bool(get_config("Slideshow", "loop")) or False
