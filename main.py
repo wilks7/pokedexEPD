@@ -29,7 +29,7 @@ def main():
     # pokedexEPD = PokedexPaper(args.generation, args.version)
     if args.slideshow:
         from lib.pokedex_epdlib import PokedexPaper
-        pokedexPaper = PokedexEPD(args.generation, args.version)
+        pokedexPaper = PokedexPaper(args.generation, args.version)
         pokedexPaper.slideshow()
     else:
         from lib.pokedex_omni_epd import PokedexEPD
