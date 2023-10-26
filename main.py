@@ -1,7 +1,6 @@
 import configargparse
 from lib.constants import POKEMON_RANGES
 from lib.pokedex_epdlib import PokedexPaper
-from lib.pokedex_omni_epd import PokedexEPD
 from lib.pokedex import gen1_paper
 import random
 import os
@@ -27,11 +26,15 @@ def main():
 
     args, _ = parser.parse_known_args()
     
-    pokedexEPD = PokedexEPD(args.generation, args.version)
     # pokedexEPD = PokedexPaper(args.generation, args.version)
     if args.slideshow:
-        pokedexEPD.slideshow()
+        from lib.pokedex_epdlib import PokedexPaper
+        pokedexPaper = PokedexEPD(args.generation, args.version)
+        pokedexPaper.slideshow()
     else:
+        from lib.pokedex_omni_epd import PokedexEPD
+
+        pokedexEPD = PokedexEPD(args.generation, args.version)
         pokedex = args.pokedex
         if pokedex is None :
             pokedex = random.randint(POKEMON_RANGES[args.generation])
