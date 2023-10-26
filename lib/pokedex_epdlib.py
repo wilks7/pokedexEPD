@@ -10,7 +10,7 @@ class PokedexPaper(Screen):
     def __init__(self, generation, version):
         epd = get_config("EPDLIB", "epd")
         vcom = float(get_config("IT8951.it8951", "vcom"))
-        rotation = int(get_config("Display", "rotation"))
+        rotation = int(get_config("Display", "rotate"))
         super().__init__(epd=epd, rotation=rotation, vcom=vcom)
         self.pokedex = Gen1(self.resolution, generation, version)
         self.width, self.height = self.resolution
