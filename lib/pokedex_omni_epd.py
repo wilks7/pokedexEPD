@@ -35,11 +35,13 @@ class PokedexEPD:
         if not sorted:
             random.shuffle(pokedex_entries)
 
+        self.epd.prepare()
+
         for pokedex in pokedex_entries:
-            self.epd.prepare()
+            self.epd.clear()
             img = self.pokedex.draw_dex(pokedex, None)
             self.epd.display(img)
-            self.epd.close
+            # self.epd.close
             sleep(delay)
 
         self.epd.close()
