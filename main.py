@@ -6,7 +6,7 @@ import random
 import os
 import sys
 from time import sleep
-from .lib.config import get_config
+from lib.config import get_config
 
 def main():
     config_file = os.path.join(os.getcwd(), 'omni-epd.ini')
