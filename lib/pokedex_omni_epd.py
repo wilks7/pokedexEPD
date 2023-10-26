@@ -31,7 +31,7 @@ class PokedexEPD:
         delay = delay or get_config("Slideshow", "delay") or 10
         loop = loop or bool(get_config("Slideshow", "loop")) or False
 
-        start, end = POKEMON_RANGES.get(self.generation, None)
+        start, end = POKEMON_RANGES.get(self.pokedex.generation, None)
         pokedex_entries = list(range(start, end + 1))
         
         if not sorted:
