@@ -18,7 +18,7 @@ class PokedexEPD:
             sys.exit()
 
     def display(self, pokedex_entry, variant=None):
-        self.epd.prepare()
+        # self.epd.prepare()
 
         img = self.pokedex.draw_dex(pokedex_entry, variant)
         self.epd.clear()
@@ -40,6 +40,6 @@ class PokedexEPD:
         for pokedex in pokedex_entries:
             self.display(pokedex)
             sleep(delay)
-            
+
         self.epd.close()
 
