@@ -95,8 +95,10 @@ if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: python get_pokemon_data.py <pokemon_number>")
     else:
-        pokemon = fetch_pokemon(int(sys.argv[1]))
+        entry = int(sys.argv[1])
+        pokemon = fetch_pokemon(entry, 1, "red-blue", "gray")
         if pokemon:
             print(pokemon.species)
-            print(pokemon.sprite)
+            print(pokemon.height)
+            print(pokemon.weight)
 

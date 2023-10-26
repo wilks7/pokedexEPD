@@ -12,8 +12,8 @@ class Pokedex:
         pokemon = fetch_pokemon(pokedex, self.generation, self.version)
         return pokemon
     
-    def get_image(self, pokedex, size=None):
-        sprite = fetch_sprite(pokedex, self.generation, self.version, None)
+    def get_image(self, pokedex, variant=None, size=None):
+        sprite = fetch_sprite(pokedex, self.generation, self.version, variant)
         if size is None:
             return sprite
         else:

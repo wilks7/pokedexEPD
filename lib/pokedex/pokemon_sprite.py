@@ -32,7 +32,7 @@ def build_sprite_url(pokedex_entry, generation, version=None, variant=None):
     version_path = version or DEFAULT_GAMES.get(generation)
     
     path = f"versions/{generation_path}/{version_path}/"
-
+    print(variant)
     if variant:
         if version_path in GAME_VARIANTS:
             valid_variants = GAME_VARIANTS[version_path]
@@ -43,6 +43,7 @@ def build_sprite_url(pokedex_entry, generation, version=None, variant=None):
     
     path += f"{pokedex_entry}.png"
     
+    print(base_url + path)
     return base_url + path
 
 def _toRoman(number):
