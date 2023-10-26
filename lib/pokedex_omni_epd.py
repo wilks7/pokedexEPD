@@ -18,12 +18,10 @@ class PokedexEPD:
             sys.exit()
 
     def display(self, pokedex_entry, variant=None):
-        # self.epd.prepare()
-
+        self.epd.prepare()
         img = self.pokedex.draw_dex(pokedex_entry, variant)
-        self.epd.clear()
-
         self.epd.display(img)
+        self.epd.close
 
 
     def slideshow(self, sorted=None, delay=None, loop=None):
@@ -37,7 +35,10 @@ class PokedexEPD:
         if not sorted:
             random.shuffle(pokedex_entries)
 
+        self.epd.prepare()
+
         for pokedex in pokedex_entries:
+            self.epd.clear()
             self.display(pokedex)
             sleep(delay)
 
