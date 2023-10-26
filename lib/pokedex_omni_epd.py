@@ -37,7 +37,7 @@ class PokedexEPD:
 
         self.epd.prepare()
         for pokedex in pokedex_entries:
-            img = self.pokedex.draw_dex(pokedex, variant)
+            img = self.pokedex.draw_dex(pokedex, None)
             self.epd.display(img)
             self.epd.close
             sleep(delay)
