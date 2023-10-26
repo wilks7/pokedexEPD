@@ -7,4 +7,8 @@ def get_config(section, value):
     file_parser = configparser.ConfigParser()
     file_parser.read(config_file)
 
-    return file_parser.get(section, value)
+    try:
+        return file_parser.get(section, value)
+    except:
+        return None
+

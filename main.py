@@ -1,13 +1,15 @@
 import configargparse
-from lib import constants
-from lib.pokedex_epd import PokedexEPD
+from lib.constants import POKEMON_RANGES
+from lib.pokedex_epdlib import PokedexPaper
+from lib.pokedex_omni_epd import PokedexEPD
+from lib.pokedex import gen1_paper
 import random
 import os
 import sys
 
 
 def main():
-    config_file = os.path.join(os.getcwd(), 'config.ini')
+    config_file = os.path.join(os.getcwd(), 'omni-epd.ini')
     
     parser = configargparse.ArgParser(
         default_config_files=[config_file] if config_file else [],
@@ -23,32 +25,32 @@ def main():
 
     parser.add_argument('--config', is_config_file=True, help='Config file path')
 
-    args = parser.parse_known_args()
-
-
-    generation = args.generation
+    args, _ = parser.parse_known_args()
     
-    pokedexEPD = PokedexEPD(generation, args.version)
-
+    pokedexEPD = PokedexEPD(args.generation, args.version)
+    # pokedexEPD = PokedexPaper(args.generation, args.version)
     if args.slideshow:
         pokedexEPD.slideshow()
     else:
         pokedex = args.pokedex
         if pokedex is None :
-            pokedex = random.randint(constants.POKEMON_RANGES[generation])
+            pokedex = random.randint(POKEMON_RANGES[args.generation])
             
-        _check_generation(pokedex, generation)
-        pokedexEPD.display(args.pokedex, args.generation)
+        _check_generation(pokedex, args.generation)
+        pokedexEPD.display(args.pokedex, None)
 
 def _check_generation(pokedex, generation):
     if 0 < generation < 10:
-        (start,end) = constants.POKEMON_RANGES[generation]
+        (start,end) = POKEMON_RANGES[generation]
         if pokedex > end:
             print("Invalid Generation")
             sys.exit(1)  # Exit with an error code
     else:
         print("Invalid Generation")
         sys.exit(1)  # Exit with an error code
+
+
+
 
 if __name__ == "__main__":
     main()
