@@ -28,7 +28,7 @@ class PokedexEPD:
 
     def slideshow(self, sorted=None, delay=None, loop=None):
         sorted = sorted or bool(get_config("Slideshow", "sorted")) or True
-        delay = delay or int(get_config("Slideshow", "delay")) or 10
+        delay = delay or get_config("Slideshow", "delay") or 10
         loop = loop or bool(get_config("Slideshow", "loop")) or False
 
         start, end = POKEMON_RANGES.get(self.generation, None)
