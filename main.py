@@ -5,7 +5,7 @@ from lib.pokedex import gen1_paper
 import random
 import os
 import sys
-
+from time import sleep
 
 def main():
     config_file = os.path.join(os.getcwd(), 'omni-epd.ini')
@@ -29,8 +29,21 @@ def main():
     # pokedexEPD = PokedexPaper(args.generation, args.version)
     if args.slideshow:
         from lib.pokedex_epdlib import PokedexPaper
-        pokedexPaper = PokedexPaper(args.generation, args.version)
-        pokedexPaper.slideshow()
+        sorted = sorted or bool(get_config("Slideshow", "sorted")) or True
+        delay = delay or int(get_config("Slideshow", "delay")) or 10
+        loop = loop or bool(get_config("Slideshow", "loop")) or False
+
+        start, end = POKEMON_RANGES.get(self.pokedex.generation, None)
+        pokedex_entries = list(range(start, end + 1))
+        
+        if not sorted:
+            random.shuffle(pokedex_entries)
+
+        for pokedex in pokedex_entries:
+            pokedexPaper = PokedexPaper(args.generation, args.version)
+            pokedexPaper.display(pokedex)
+            sleep(delay)
+            
     else:
         from lib.pokedex_omni_epd import PokedexEPD
 
