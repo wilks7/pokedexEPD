@@ -40,3 +40,4 @@ class PokedexEPD:
         for pokedex in pokedex_entries:
             self.display(pokedex)
             sleep(delay)
+            self.epd.clear()
