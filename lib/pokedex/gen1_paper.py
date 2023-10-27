@@ -31,9 +31,7 @@ class Gen1(Pokedex):
 
     def draw_image(self, pokedex, variant):
         text_height = (self.height // 2) // 10
-        print('Padding', self.padding)
         size = min(self.image_block[0], self.image_block[1]) - self.padding * 2 - text_height
-        print('Image', size)
         img = self.get_image(pokedex, variant, size)
         
         # Calculate the position to center the image within self.image_block
@@ -50,7 +48,6 @@ class Gen1(Pokedex):
     def draw_num(self, pokedex, image_size):
         # padding = (self.height * 0.2) // 2
         text_height = (self.height // 2) // 10
-        print("Height", text_height)
 
         text = f"No. {pokedex:03}"
 
@@ -100,10 +97,10 @@ class Gen1(Pokedex):
         """Add the Pokémon's attributes to the Pokedex canvas left-aligned in the 'stats' block with dynamic font sizes."""
         text_padding = 64
         trailing_padding = 32
+
         # Determine the available height and width based on the dimensions of stats_block
         available_height = self.stats_block[1] - text_padding * 4  # 3 paddings for 4 text items
         available_width = self.stats_block[0] - trailing_padding   # padding on both sides
-        
 
         font_size = self._optimize_font_size(name.upper(), available_width, available_height // 4)
         font_size = int(font_size * 0.8)
@@ -115,43 +112,37 @@ class Gen1(Pokedex):
         weight_lb = self.kg_to_lb(weight)
         height_ft_in = self.meters_to_feet_inches(height)
 
-        # Attributes with converted values
-        attributes = [
-            (name.upper(), font),
-            (species, font),
-            (f"HT {height_ft_in}", font),
-            (f"WT {weight_lb}", font)
-        ]
-
-        # Compute the total height of all text items plus padding between them
-        total_height = sum([font.getbbox(attr)[3] for attr, font in attributes]) + text_padding * (len(attributes) - 1)
-
         # Calculate starting Y coordinate to center the list within the "stats" block
+        total_height = 4 * font.getbbox(name.upper())[3] + 3 * text_padding  # assuming all text items have similar height
         y = (self.stats_block[1] - total_height) // 2
         x = self.image_block[0]
 
-        for attr, font in attributes:
-            if "HT" in attr or "WT" in attr:
-                # Separate label (either HT or WT) and its value
-                label, value = attr.split(maxsplit=1)
+        # Draw Name
+        self.draw.text((x, y), name.upper(), font=font, fill="black")
+        y += font.getbbox(name.upper())[3] + text_padding
 
-                # Calculate the width of the value using the font's getbbox() method
-                value_width = font.getbbox(value)[2]
+        # Draw Species
+        self.draw.text((x, y), species, font=font, fill="black")
+        y += font.getbbox(species)[3] + text_padding
 
-                # Draw the label (either HT or WT) left-aligned to self.image_block[0]
-                self.draw.text((x, y), label, font=font, fill="black")
+        # Draw Height
+        label = "HT"
+        value = height_ft_in
+        value_width = font.getbbox(value)[2]
+        self.draw.text((x, y), label, font=font, fill="black")
+        x_value = self.width - value_width
+        self.draw.text((x_value, y), value, font=font, fill="black")
+        y += font.getbbox(value)[3] + text_padding
 
-                # Calculate the X position for the value to be right-aligned to self.width
-                x_value = self.width - value_width
+        # Draw Weight
+        label = "WT"
+        value = weight_lb
+        value_width = font.getbbox(value)[2]
+        self.draw.text((x, y), label, font=font, fill="black")
+        x_value = self.width - value_width
+        self.draw.text((x_value, y), value, font=font, fill="black")
+        y += font.getbbox(value)[3] + text_padding
 
-                # Draw the value at the calculated position
-                self.draw.text((x_value, y), value, font=font, fill="black")
-            else:
-                # Draw the attribute on the canvas with its corresponding font
-                self.draw.text((x, y), attr, font=font, fill="black")
-            
-            # Adjust Y coordinate for the next attribute: increase by the height of the current text and add padding
-            y += font.getbbox(attr)[3] + text_padding
 
 
 

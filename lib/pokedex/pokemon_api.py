@@ -34,10 +34,12 @@ def _fetch_pokemon_data(pokedex, generation=None):
 
 
 
-def _build_query(pokedex, generation=8):
+def _build_query(pokedex, generation=40):
+        # getPokemonByDexNumber(number: {pokedex}, offsetFlavorTexts: {0}, reverseFlavorTexts: false, takeFlavorTexts: generation) {{
+
     return f"""
     {{
-    getPokemonByDexNumber(number: {pokedex}, offsetFlavorTexts: {generation}, reverseFlavorTexts: false) {{
+    getPokemonByDexNumber(number: {pokedex}, offsetFlavorTexts: {0}, reverseFlavorTexts: false, takeFlavorTexts: {generation}) {{
         species
         height
         weight
@@ -67,6 +69,7 @@ def _extract_pokemon_from_data(pokedex_number, pokemon_data):
 
     if flavor_texts:
         # Extract the first flavor text (assuming there's at least one)
+        # print(len(flavor_texts))
         first_flavor_text = flavor_texts[0]
         flavor = first_flavor_text.get("flavor", "")
         game = first_flavor_text.get("game", "")

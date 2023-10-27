@@ -29,10 +29,11 @@ def build_sprite_url(pokedex_entry, generation, version=None, variant=None):
     roman_numeral = _toRoman(generation)
 
     generation_path = f"generation-{roman_numeral}"
+    version = get_game_variant(version)
+    print(version)
     version_path = version or DEFAULT_GAMES.get(generation)
     
     path = f"versions/{generation_path}/{version_path}/"
-    print(variant)
     if variant:
         if version_path in GAME_VARIANTS:
             valid_variants = GAME_VARIANTS[version_path]
@@ -43,7 +44,6 @@ def build_sprite_url(pokedex_entry, generation, version=None, variant=None):
     
     path += f"{pokedex_entry}.png"
     
-    print(base_url + path)
     return base_url + path
 
 def _toRoman(number):
@@ -51,6 +51,19 @@ def _toRoman(number):
         raise ValueError("Number must be between 1 and 9")
     roman_numerals = ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix"]
     return roman_numerals[number - 1]
+
+def get_game_variant(version):
+    for key in GAME_VARIANTS:
+        # Check if the entire version is in the key
+        if version in key:
+            return key
+        # Split and check
+        if version in key.split('-'):
+            return key
+    return None
+
+
+
 
 
 # Mapping of games (versions) to their available sprite variants

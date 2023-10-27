@@ -25,18 +25,3 @@ class PokedexEPD:
         epd.close
 
 
-    def slideshow(self, sorted=None, delay=None, loop=None):
-        sorted = sorted or bool(get_config("Slideshow", "sorted")) or True
-        delay = delay or int(get_config("Slideshow", "delay")) or 10
-        loop = loop or bool(get_config("Slideshow", "loop")) or False
-
-        start, end = POKEMON_RANGES.get(self.pokedex.generation, None)
-        pokedex_entries = list(range(start, end + 1))
-        
-        if not sorted:
-            random.shuffle(pokedex_entries)
-
-        for pokedex in pokedex_entries:
-            self.display(pokedex)
-            sleep(delay)
-
