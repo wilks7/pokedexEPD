@@ -55,6 +55,8 @@ def _check_pokedex_entry(pokedex, gen_data):
 
     if not (start <= pokedex <= end):
         raise InvalidGenerationError(f"Pokedex number {pokedex} does not belong to Generation {gen_data['title']}.")
+    else:
+        return pokedex
 
 
 def _check_version_for_generation(gen_data, version=None):
