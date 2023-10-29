@@ -13,7 +13,7 @@ def display_pokemon(pokedex, generation, version=None):
     gen_data = _check_generation(generation)
     pokedex = _check_pokedex_entry(pokedex, gen_data)
 
-    version = _check_version_for_generation(generation, version)
+    version = _check_version_for_generation(gen_data, version)
     
     pokedexEPD = PokedexEPD(generation, version)
     pokedexEPD.display(pokedex)
