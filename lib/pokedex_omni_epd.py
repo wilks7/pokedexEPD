@@ -2,7 +2,6 @@ from omni_epd import displayfactory, EPDNotFoundError
 import sys
 from .pokedex.gen1_paper import Gen1
 from .config import get_config
-from .constants import POKEMON_RANGES
 import random
 from time import sleep
 
