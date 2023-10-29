@@ -8,19 +8,21 @@ from time import sleep
 class PokedexEPD:
     def __init__(self, generation, version):
         try:
-            epd = displayfactory.load_display_driver()
-            resolution = (epd.width, epd.height)
-            self.pokedex = Gen1(resolution, generation, version)
+            self.epd = displayfactory.load_display_driver()
+            self.resolution = (self.epd.width, self.epd.height)
+            self.generation = generation
+            self.version = version
 
         except EPDNotFoundError:
             print(f"Couldn't find Display")
             sys.exit()
 
     def display(self, pokedex_entry, variant=None):
-        epd = displayfactory.load_display_driver()
-        epd.prepare()
-        img = self.pokedex.draw_dex(pokedex_entry, variant)
-        epd.display(img)
-        epd.close
+        pokedex = Gen1(self.resolution, self.generation, self.version)
+        # epd = displayfactory.load_display_driver()
+        self.epd.prepare()
+        img = pokedex.draw_dex(pokedex_entry, variant)
+        self.epd.display(img)
+        self.epd.close
 
 
