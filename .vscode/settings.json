@@ -1,0 +1,16 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/node_modules": true,
+        "**/*.log": true,
+        "pienv": true,
+        "LICENSE": true,
+        "CHANGELOG.MD":true,
+        "requirements.txt":true,
+        "README.md":true,
+        ".envrc":true,
+        ".gitignore":true,
+        "**/__pycache__":true
+    }
+ }
+ 

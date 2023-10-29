@@ -27,12 +27,8 @@ def main():
         if args.slideshow:
             start_slideshow(args.generation, args.version)
         else:
-            gen_data = GENERATIONS.get(args.generation, None)
-            if not gen_data:
-                raise InvalidGenerationError(f"Invalid Generation {args.generation}.")
-                
-            pokedex = args.pokedex or random.randint(*gen_data['range'])
-            display_pokemon(pokedex, args.generation, args.version)
+
+            display_pokemon(args.pokedex, args.generation, args.version)
             app.run(host='0.0.0.0', port=5000)  # Listening on all interfaces
 
     except InvalidGenerationError as e:

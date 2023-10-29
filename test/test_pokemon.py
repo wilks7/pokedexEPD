@@ -1,4 +1,4 @@
-from .pokedex.gen1_paper import Gen1
+from ..lib.pokedex.gen1_paper import Gen1
 
 def display_pokemon(resolution, pokedex_entry, generation, version, variant):
     dex = Gen1(resolution, generation, version)
