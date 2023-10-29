@@ -2,7 +2,6 @@ from PIL import Image, ImageDraw, ImageFont
 from .pokedex_helper import Pokedex
 import textwrap
 
-
 class Gen1(Pokedex):
     def __init__(self, resolution, generation, version):
         super().__init__(generation, version)
