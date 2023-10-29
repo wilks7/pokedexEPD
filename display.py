@@ -58,11 +58,14 @@ def _check_pokedex_entry(pokedex, gen_data):
 
 def _check_version_for_generation(gen_data, version=None):
 
+    # If no version is provided, return the first version for the given generation
     if version is None:
-        return gen_data['versions'][0]
+        return list(gen_data['versions'].keys())[0]
 
+    # Check if the provided version is valid for the given generation
     if version not in gen_data['versions']:
         raise InvalidGenerationError(f"Version {version} is not valid for Generation {gen_data['title']}.")
 
     return version
+
 
