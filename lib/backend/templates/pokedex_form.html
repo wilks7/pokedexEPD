@@ -1,0 +1,21 @@
+<form action="/pokedex" method="post">
+    <label for="generation">Generation:</label>
+    <select id="generation" name="generation">
+        {% for gen_num, gen_data in generations.items() %}
+            <option value="{{ gen_num }}">{{ gen_data['title'] }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <label for="pokemon_number">Pokemon Number:</label>
+    <input type="number" id="pokemon_number" name="pokemon_number" min="{{ generations[1]['range'][0] }}" max="{{ generations[2]['range'][1] }}"><br><br>
+    <!-- Note: You may want to use JS to update the min-max values based on the selected generation -->
+
+    <label for="version">Version:</label>
+    <select id="version" name="version">
+        {% for version in generations[1]['versions'] %}  <!-- Defaulting to Gen 1 versions, you might want to use JS to update this based on selected generation -->
+            <option value="{{ version }}">{{ version }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <input type="submit" value="Display Pokemon">
+</form>
