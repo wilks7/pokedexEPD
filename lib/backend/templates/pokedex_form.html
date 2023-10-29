@@ -1,21 +1,65 @@
-<form action="/pokedex" method="post">
-    <label for="generation">Generation:</label>
-    <select id="generation" name="generation">
-        {% for gen_num, gen_data in generations.items() %}
-            <option value="{{ gen_num }}">{{ gen_data['title'] }}</option>
-        {% endfor %}
-    </select><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Pokemon</title>
+</head>
+<body>
+    <form action="/pokedex" method="post">
+        
+        <!-- Generation Dropdown -->
+        <label for="generation">Generation:</label>
+        <select id="generation" name="generation" onchange="updateFormOptions()">
+            {% for gen_num, gen_data in generations.items() %}
+                <option value="{{ gen_num }}">{{ gen_data['title'] }}</option>
+            {% endfor %}
+        </select><br><br>
+        
+        <!-- Pokemon Number Input -->
+        <label for="pokemon_number">Pokemon Number:</label>
+        <input type="number" id="pokemon_number" name="pokemon_number" min="1" max="898"><br><br> <!-- You can adjust these min-max values dynamically with JavaScript based on the selected generation -->
+        
+        <!-- Version Dropdown -->
+        <label for="version">Version:</label>
+        <select id="version" name="version">
+            {% for version in generations[1]['versions'] %}  <!-- Defaulting to Gen 1 versions. Ideally, you'd use JavaScript to dynamically update this dropdown based on the selected generation -->
+                <option value="{{ version }}">{{ version.replace("-", " ").title() }}</option> <!-- This will format "red-blue" as "Red Blue" -->
+            {% endfor %}
+        </select><br><br>
 
-    <label for="pokemon_number">Pokemon Number:</label>
-    <input type="number" id="pokemon_number" name="pokemon_number" min="{{ generations[1]['range'][0] }}" max="{{ generations[2]['range'][1] }}"><br><br>
-    <!-- Note: You may want to use JS to update the min-max values based on the selected generation -->
+        <input type="submit" value="Display Pokemon">
+    </form>
 
-    <label for="version">Version:</label>
-    <select id="version" name="version">
-        {% for version in generations[1]['versions'] %}  <!-- Defaulting to Gen 1 versions, you might want to use JS to update this based on selected generation -->
-            <option value="{{ version }}">{{ version }}</option>
-        {% endfor %}
-    </select><br><br>
-
-    <input type="submit" value="Display Pokemon">
-</form>
+    <!-- Optional JavaScript to dynamically update form options based on selected generation -->
+    <script>
+        function updateFormOptions() {
+            // Get the selected generation
+            let selectedGen = document.getElementById('generation').value;
+            
+            // Update the Pokemon Number range based on the selected generation
+            let genData = {
+                // Add the ranges and versions for each generation here
+                // This data should match the data in your GENERATIONS constant
+                1: { range: [1, 151], versions: ['red-blue', 'yellow'] },
+                2: { range: [152, 251], versions: ['gold-silver', 'crystal'] },
+                // ... Add more generations as needed
+            };
+            
+            let selectedGenData = genData[selectedGen];
+            document.getElementById('pokemon_number').min = selectedGenData.range[0];
+            document.getElementById('pokemon_number').max = selectedGenData.range[1];
+            
+            // Update the Version dropdown based on the selected generation
+            let versionDropdown = document.getElementById('version');
+            versionDropdown.innerHTML = ""; // Clear current options
+            selectedGenData.versions.forEach(version => {
+                let option = document.createElement('option');
+                option.value = version;
+                option.text = version.replace("-", " ").charAt(0).toUpperCase() + version.replace("-", " ").slice(1); // Format "red-blue" as "Red Blue"
+                versionDropdown.add(option);
+            });
+        }
+    </script>
+</body>
+</html>
