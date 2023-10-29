@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Pokemon</title>
+</head>
+<body>
+    <form action="/pokedex" method="post">
+        <label for="pokemon_number">Pokemon Number:</label>
+        <select id="pokemon_number" name="pokemon_number">
+            <!-- Sample options, you can add more as needed -->
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <!-- ... -->
+        </select><br><br>
+        
+        <label for="generation">Generation:</label>
+        <select id="generation" name="generation">
+            <option value="1">Gen1</option>
+            <option value="2">Gen2</option>
+            <!-- ... -->
+        </select><br><br>
+        
+        <label for="version">Version:</label>
+        <select id="version" name="version">
+            <option value="red-blue">Red-Blue</option>
+            <option value="gold-silver">Gold-Silver</option>
+            <!-- ... -->
+        </select><br><br>
+
+        <input type="submit" value="Display Pokemon">
+    </form>
+</body>
+</html>
