@@ -9,8 +9,7 @@ class InvalidGenerationError(Exception):
 
 def display_pokemon(pokedex, generation, version=None):
     _check_generation(pokedex, generation)
-    if version:  # If a version is provided, check its validity
-        _check_version_for_generation(generation, version)
+    version = _check_version_for_generation(generation, version)
     
     pokedexEPD = PokedexEPD(generation, version)
     pokedexEPD.display(pokedex)
@@ -42,11 +41,16 @@ def _check_generation(pokedex, generation):
     else:
         raise InvalidGenerationError(f"Invalid Generation {generation}.")
 
-def _check_version_for_generation(generation, version):
+def _check_version_for_generation(generation, version=None):
     gen_data = GENERATIONS.get(generation, None)
     if not gen_data:
         raise InvalidGenerationError(f"Invalid Generation {generation}.")
 
+    if version is None:
+        return gen_data['versions'][0]
+
     if version not in gen_data['versions']:
         raise InvalidGenerationError(f"Version {version} is not valid for Generation {generation}.")
+
+    return version
 
