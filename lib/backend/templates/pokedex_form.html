@@ -55,12 +55,13 @@
             var selectedGeneration = document.getElementById("generation").value;
             var generations = {{ generations | tojson }};
             var pokedexRange = generations[selectedGeneration]["range"];
+            var pokedexRangeEnd = generations[selectedGeneration]["range"][1];
             var versions = Object.keys(generations[selectedGeneration]["versions"]);  // Get the version names as an array
     
             // Update Pokedex numbers dropdown
             var pokedexDropdown = document.getElementById("pokemon_number");
             pokedexDropdown.innerHTML = "";  // Clear current options
-            for (var i = pokedexRange[0]; i <= pokedexRange[1]; i++) {
+            for (var i = 1; i <= pokedexRangeEnd; i++) {
                 var option = document.createElement("option");
                 option.value = i;
                 option.text = i;
