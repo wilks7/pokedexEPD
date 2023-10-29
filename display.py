@@ -8,7 +8,11 @@ class InvalidGenerationError(Exception):
     pass
 
 def display_pokemon(pokedex, generation, version=None):
-    _check_generation(pokedex, generation)
+
+                
+    generation = _check_generation(generation)
+    pokedex = _check_pokedex_entry(pokedex, generation)
+
     version = _check_version_for_generation(generation, version)
     
     pokedexEPD = PokedexEPD(generation, version)
@@ -32,12 +36,21 @@ def start_slideshow(generation, version=None):
         display_pokemon(pokedex, generation, version)
         sleep(delay)
 
-def _check_generation(pokedex, generation):
+
+def _check_pokedex_entry(pokedex, gen_data):
+    start, end = gen_data['range']
+
+    if not pokedex:
+        return random.randint(*gen_data['range'])
+
+    if not (start <= pokedex <= end):
+        raise InvalidGenerationError(f"Pokedex number {pokedex} does not belong to Generation {gen_data['title']}.")
+
+
+def _check_generation(generation):
     gen_data = GENERATIONS.get(generation, None)
     if gen_data:
-        start, end = gen_data['range']
-        if not (start <= pokedex <= end):
-            raise InvalidGenerationError(f"Pokedex number {pokedex} does not belong to Generation {generation}.")
+        return generation
     else:
         raise InvalidGenerationError(f"Invalid Generation {generation}.")
 
