@@ -55,8 +55,8 @@
             var selectedGeneration = document.getElementById("generation").value;
             var generations = {{ generations | tojson }};
             var pokedexRange = generations[selectedGeneration]["range"];
-            var versions = generations[selectedGeneration]["versions"];
-
+            var versions = Object.keys(generations[selectedGeneration]["versions"]);  // Get the version names as an array
+    
             // Update Pokedex numbers dropdown
             var pokedexDropdown = document.getElementById("pokemon_number");
             pokedexDropdown.innerHTML = "";  // Clear current options
@@ -66,7 +66,7 @@
                 option.text = i;
                 pokedexDropdown.add(option);
             }
-
+    
             // Update Versions dropdown
             var versionDropdown = document.getElementById("version");
             versionDropdown.innerHTML = "";  // Clear current options
@@ -77,7 +77,7 @@
                 versionDropdown.add(option);
             }
         }
-    </script>
+    </script>    
 </head>
 <body>
 
