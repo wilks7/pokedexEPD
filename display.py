@@ -53,7 +53,7 @@ def _check_pokedex_entry(pokedex, gen_data):
     if pokedex is None:
         return random.randint(*gen_data['range'])
 
-    if not (start <= pokedex <= end):
+    if not (1 <= pokedex <= end):
         raise InvalidGenerationError(f"Pokedex number {pokedex} does not belong to Generation {gen_data['title']}.")
     else:
         return pokedex
