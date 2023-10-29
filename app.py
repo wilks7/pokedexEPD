@@ -3,7 +3,7 @@ import os
 import sys
 from display import display_pokemon, start_slideshow, InvalidGenerationError
 import random
-from lib.constants import POKEMON_RANGES
+from lib.constants import GENERATIONS
 from lib.backend.server import app  # Import Flask app from server.py
 
 
@@ -27,7 +27,11 @@ def main():
         if args.slideshow:
             start_slideshow(args.generation, args.version)
         else:
-            pokedex = args.pokedex or random.randint(*POKEMON_RANGES[args.generation])
+            gen_data = GENERATIONS.get(args.generation, None)
+            if not gen_data:
+                raise InvalidGenerationError(f"Invalid Generation {args.generation}.")
+                
+            pokedex = args.pokedex or random.randint(*gen_data['range'])
             display_pokemon(pokedex, args.generation, args.version)
             app.run(host='0.0.0.0', port=5000)  # Listening on all interfaces
 
