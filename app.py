@@ -1,7 +1,8 @@
 import configargparse
 import os
 import sys
-from lib.pokedex_display import display_pokemon, start_slideshow, InvalidGenerationError
+from display import display_pokemon, start_slideshow, InvalidGenerationError
+
 import random
 from lib.constants import POKEMON_RANGES
 from lib.backend import app  # Import Flask app from server.py

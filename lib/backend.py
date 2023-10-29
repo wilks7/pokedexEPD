@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
-from pokedex_display import display_pokemon, InvalidGenerationError
-
+# from pokedex_display import display_pokemon, InvalidGenerationError
+from display import display_pokemon, InvalidGenerationError
 
 app = Flask(__name__)
 
