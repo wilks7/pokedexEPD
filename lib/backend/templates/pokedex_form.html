@@ -1,64 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Select Pokemon</title>
-</head>
-<body>
-    <form action="/pokedex" method="post">
-        <!-- Generation Dropdown -->
-        <label for="generation">Generation:</label>
-        <select id="generation" name="generation" onchange="updateFormOptions()">
-            {% for gen_num, gen_data in generations.items() %}
-                <option value="{{ gen_num }}">{{ gen_data['title'] }}</option>
-            {% endfor %}
-        </select><br><br>
-    
-        <!-- Pokemon Number Dropdown -->
-        <label for="pokemon_number">Pokemon Number:</label>
-        <select id="pokemon_number" name="pokemon_number">
-            <!-- Options will be populated dynamically based on the selected generation -->
-        </select><br><br>
-    
-        <!-- Version Dropdown -->
-        <label for="version">Version:</label>
-        <select id="version" name="version">
-            <!-- Options will be populated dynamically based on the selected generation -->
-        </select><br><br>
-    
-        <input type="submit" value="Display Pokemon">
-    </form>
-    
-
-    <!-- Optional JavaScript to dynamically update form options based on selected generation -->
+    <title>Pokedex Form</title>
     <script>
-        function updateFormOptions() {
-            // Get the selected generation
-            let selectedGen = document.getElementById('generation').value;
+        function updateOptions() {
+            var selectedGeneration = document.getElementById("generation").value;
+            var generations = {{ generations | tojson }};
+            var pokedexRange = generations[selectedGeneration]["range"];
+            var versions = generations[selectedGeneration]["versions"];
 
-            // Update the Pokemon Number dropdown based on the selected generation
-            let selectedGenData = GENERATIONS[selectedGen];
-            let pokemonDropdown = document.getElementById('pokemon_number');
-            pokemonDropdown.innerHTML = ""; // Clear current options
-            for(let i = selectedGenData.range[0]; i <= selectedGenData.range[1]; i++) {
-                let option = document.createElement('option');
+            // Update Pokedex numbers dropdown
+            var pokedexDropdown = document.getElementById("pokemon_number");
+            pokedexDropdown.innerHTML = "";  // Clear current options
+            for (var i = pokedexRange[0]; i <= pokedexRange[1]; i++) {
+                var option = document.createElement("option");
                 option.value = i;
                 option.text = i;
-                pokemonDropdown.add(option);
+                pokedexDropdown.add(option);
             }
 
-            // Update the Version dropdown based on the selected generation
-            let versionDropdown = document.getElementById('version');
-            versionDropdown.innerHTML = ""; // Clear current options
-            selectedGenData.versions.forEach(version => {
-                let option = document.createElement('option');
-                option.value = version;
-                option.text = version.replace("-", " ").charAt(0).toUpperCase() + version.replace("-", " ").slice(1); // Format "red-blue" as "Red Blue"
+            // Update Versions dropdown
+            var versionDropdown = document.getElementById("version");
+            versionDropdown.innerHTML = "";  // Clear current options
+            for (var i = 0; i < versions.length; i++) {
+                var option = document.createElement("option");
+                option.value = versions[i];
+                option.text = versions[i].split('-').join(' ').toUpperCase();  // Convert 'red-blue' to 'RED BLUE'
                 versionDropdown.add(option);
-            });
+            }
         }
-        window.onload = updateFormOptions;
     </script>
+</head>
+<body>
+
+<form action="/pokedex" method="post">
+    <label for="generation">Generation:</label>
+    <select id="generation" name="generation" onchange="updateOptions()">
+        {% for gen, details in generations.items() %}
+            <option value="{{ gen }}">{{ details["title"] }}</option>
+        {% endfor %}
+    </select>
+    
+    <label for="pokemon_number">Pokedex Number:</label>
+    <select id="pokemon_number" name="pokemon_number">
+        <!-- This will be populated by JavaScript -->
+    </select>
+    
+    <label for="version">Version:</label>
+    <select id="version" name="version">
+        <!-- This will be populated by JavaScript -->
+    </select>
+    
+    <input type="submit" value="Submit">
+</form>
+
+<!-- Initialize the dropdowns for the first time -->
+<script>
+    updateOptions();
+</script>
+
 </body>
 </html>
