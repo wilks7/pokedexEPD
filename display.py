@@ -41,7 +41,7 @@ def start_slideshow(generation, version=None):
 def _check_generation(generation):
     gen_data = GENERATIONS.get(generation, None)
     if gen_data:
-        return generation
+        return gen_data
     else:
         raise InvalidGenerationError(f"Invalid Generation {generation}.")
     
