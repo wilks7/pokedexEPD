@@ -1,5 +1,5 @@
 from lib.constants import GENERATIONS
-from lib.pokedex.gen1_paper import Gen1
+from lib.Gen1Dex import Gen1
 import random
 from dataclasses import dataclass
 
@@ -28,7 +28,7 @@ def display_pokemon(resolution, pokedex, generation, version=None, variant=None)
     print(pokedex, generation, version)
     
     dex = Gen1(resolution, generation, version)
-    img = dex.display(pokedex, variant)
+    img = dex.draw_dex(pokedex, variant)
 
     return img
 

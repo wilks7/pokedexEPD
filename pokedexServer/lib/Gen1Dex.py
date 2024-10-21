@@ -1,5 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont
-from .pokedex_helper import Pokedex
+from lib.Pokedex import Pokedex
 import textwrap
 
 class Gen1(Pokedex):
@@ -15,17 +15,16 @@ class Gen1(Pokedex):
         self.image_block = (self.width // 2, self.height // 2)
         self.stats_block = (self.width // 2, self.height // 2)
 
-    def display(self, pokedex, variant=None):
-        return self.draw_dex(pokedex, variant)
-
 
     def draw_dex(self, pokedex, variant=None):
         pokemon = self.get_pokemon(pokedex)
         size = self.draw_image(pokedex, variant)
+
         self.add_stats(pokemon.species, pokemon.type, pokemon.height, pokemon.weight)
         self.add_description(pokemon.flavor)
         self.draw_num(pokedex, size)
         self.add_custom_line()
+
         return self.canvas
 
     def draw_image(self, pokedex, variant):
@@ -189,8 +188,21 @@ class Gen1(Pokedex):
 
 
 if __name__ == "__main__":
-    resolution = (1920, 1080)
-    dex = Gen1(resolution, 1, 'yellow')
-    img = dex.display(25)
+    import argparse
+    parser = argparse.ArgumentParser(description="Fetch and display Pokémon data from PokeAPI.")
+    
+    parser.add_argument("--pokedex", type=int, default=1, help="Pokédex entry number (default: 1)")
+    parser.add_argument("--generation", type=int, default=1)
+    parser.add_argument("--version", type=str, default="red-blue", help="Game version (default: None)")
+    parser.add_argument("--variant", type=str, default=None, help="Sprite variant (default: None)")
+    parser.add_argument("--resolution", type=str, default="1920x1080")
+    
+    args = parser.parse_args()
+
+    resolution = tuple(map(int, args.resolution.split('x')))
+
+    dex = Gen1(resolution, args.generation, args.version)
+
+    img = dex.draw_dex(args.pokedex)
+
     img.show()
-    # img.save("output_pokedex.png")

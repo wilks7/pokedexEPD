@@ -68,3 +68,35 @@ GENERATIONS = {
         }
     }
 }
+
+GAME_VARIANTS = {
+    "red-blue": ["back", "gray", "transparent", "back-gray"],
+    "yellow": ["back", "gbc", "gray", "transparent", "back-gbc", "back-gray", "back-transparent"],
+    "crystal": ["back", "shiny", "back-shiny", "transparent", "transparent-shiny", "back-transparent", "back-transparent-shiny"],
+    "gold": ["back", "shiny", "transparent", "back-shiny"],
+    "silver": ["back", "shiny", "transparent", "back-shiny"],
+    "ruby-sapphire": ["back", "shiny", "back-shiny"],
+    "emerald": ["shiny"],
+    "fire-red-leaf-green": ["back", "shiny", "back-shiny"],
+    "diamond-pearl": ["back", "female", "shiny", "back-female", "back-shiny", "shiny-female"],
+    "platinum": ["back", "female", "shiny", "back-female", "back-shiny", "shiny-female"],
+    "heart-gold-soul-silver": ["back", "female", "shiny", "back-female", "back-shiny", "shiny-female"],
+    "black-white": ["back", "female", "shiny", "back-female", "back-shiny", "shiny-female", "animated"],
+    "x-y": ["female", "shiny", "shiny-female"],
+    "omega-ruby-alpha-sapphire": ["female", "shiny", "shiny-female"],
+    "ultra-sun-ultra-moon": ["female", "shiny", "shiny-female"],
+    "icons": ["female"]
+}
+
+OTHER_SPRITE_CATEGORIES = ["dream-world", "home", "official-artwork", "showdown"]
+
+DEFAULT_VERSIONS = {
+    1: "red-blue",
+    2: "silver",
+    3: "ruby-sapphire",
+    4: "diamond-pearl",
+    5: "black-white",
+    6: "x-y",
+    7: "ultra-sun-ultra-moon",
+    8: "icons"
+}
