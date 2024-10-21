@@ -1,4 +1,4 @@
-from ..lib.pokedex.gen1_paper import Gen1
+from lib.pokedex.gen1_paper import Gen1
 
 def display_pokemon(resolution, pokedex_entry, generation, version, variant):
     dex = Gen1(resolution, generation, version)
@@ -19,8 +19,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Display a Pokemon image.")
 
     parser.add_argument("--resolution", type=str, default="1872x1404")
-    parser.add_argument("--generation", type=int)
-    parser.add_argument("--version", type=str, default=None)
+    parser.add_argument("--generation", type=int, default=1)
+    parser.add_argument("--version", type=str, default="red-blue")
     parser.add_argument("--pokemon", type=int, default=25)
     parser.add_argument("--variant", type=str, default=None)
     # You can add more arguments as needed.
