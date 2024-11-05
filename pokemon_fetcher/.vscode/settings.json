@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "pokemon.h": "c",
+        "string.h": "c",
+        "stdlib.h": "c",
+        "pokedex_layout.h": "c",
+        "pokemon_image.h": "c"
+    }
+}
